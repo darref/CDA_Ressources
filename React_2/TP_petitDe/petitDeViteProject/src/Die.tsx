@@ -1,14 +1,16 @@
 import react , {useState , useCallback , useEffect , useMemo} from 'react';
 import "./Die.css"
 
-const Die = () => {
+const Die = (props: { onDieRoll: (arg0: number) => void; }) => {
 
     const [roll , setRoll] = useState(Math.floor(Math.random() * 6 + 1));
 
     const handleRoll = useCallback( () => {
-        setRoll(Math.floor(Math.random() * 6 + 1));
+        let newRoll = Math.floor(Math.random() * 6 + 1)
+        setRoll(newRoll);
+        props.onDieRoll(newRoll);
     }
-    ,[]
+    ,[roll]
     )
 
 
