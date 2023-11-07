@@ -1,0 +1,46 @@
+body , html , #root{
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+#root{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Calc{
+  width: 50%;
+  height: 50%;
+  border: 1px solid black;
+  padding: 2%;
+}
+.zoneResultat{
+  width: 100%;
+  height: 25%;
+  background-color: grey;
+  display: flex;
+  flex-direction: colrowumn;
+  justify-content: center;
+  align-items: center;
+}
+
+.zonePad{
+  width: 100%;
+  height: 85%;
+
+}
+
+.screenResultat{
+  height: 90%;
+  width: 90%;
+  background-color: white;
+  margin: 2%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+}
