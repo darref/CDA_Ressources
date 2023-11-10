@@ -6,24 +6,46 @@ function App() {
   const [chaineResultat, setChaineResultat] = useState("");
 
   const handleReturnValue = useCallback((val:string)=>{
-      console.log(val , chaineResultat)
-      let newResult = chaineResultat + val;
-      setChaineResultat(newResult);
+        console.log(val , chaineResultat)
+        if(chaineResultat === "error")
+        {
+          setChaineResultat(val)
+        }
+        else
+        {
+          let newResult = chaineResultat + val;
+          setChaineResultat(newResult);
+        }
+      
       },[chaineResultat])
 
   const handleClearing = useCallback((val:string)=>{
     console.log(val , chaineResultat)
-    let newResult = chaineResultat.substring(0 , chaineResultat.length -1)
-    setChaineResultat(newResult);
+    if(chaineResultat === "error")
+    {
+      setChaineResultat("")
+    }
+    else
+    {
+      let newResult = chaineResultat.substring(0 , chaineResultat.length -1)
+      setChaineResultat(newResult);
+    }
+    
     },[chaineResultat])
+
+    const handleClearingAll = useCallback((val:string)=>{
+      console.log(val , chaineResultat)
+      setChaineResultat("")
+      },[chaineResultat])
 
   const handleEqual = useCallback((val:string)=>{
     console.log(val , chaineResultat)
-    //
-    
-    //
+
     let newResult = evaluateExpression(chaineResultat)
-    setChaineResultat(newResult.toString());
+    if(Number.isNaN(newResult))
+      setChaineResultat("error")
+    else
+      setChaineResultat(newResult.toString());
     console.log("ici:" , newResult)
     },[chaineResultat])
 
@@ -32,6 +54,7 @@ function App() {
       <div className='zoneResultat'>
         <p className='screenResultat'>{chaineResultat}</p>
         <Bouton val={'<-'} returnValue={handleClearing}></Bouton>
+        <Bouton val={'C'} returnValue={handleClearingAll}></Bouton>
       </div>
       <div className='zonePad'>
         <div className='zoneBoutonsNombres'>
@@ -88,7 +111,7 @@ for (let i = 1; i < terms.length; i += 2) {
       result /= operand;
       break;
     default:
-      throw new Error("Opérateur non reconnu");
+      result = NaN;
     }
   }
   return result;

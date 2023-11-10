@@ -19,12 +19,13 @@ body , html , #root{
 }
 .zoneResultat{
   width: 100%;
-  height: 25%;
+  height: 40%;
   background-color: grey;
   display: flex;
   flex-direction: colrowumn;
   justify-content: center;
   align-items: center;
+  
 }
 
 .zonePad{
@@ -46,4 +47,6 @@ body , html , #root{
   justify-content: center;
   align-items: center;
   font-size: 50px;
+  overflow: scroll;
+  text-wrap: wrap;
 }
