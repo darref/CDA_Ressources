@@ -13,3 +13,12 @@ Content-Type: application/json
     "Fav" : "true"
     }
 }
+
+###
+POST  http://localhost:1337/api/auth/local
+content-type: application/json
+
+{
+    "identifier": "xxxxx",
+    "password": "xxxxxxxxx@"
+}
