@@ -1,0 +1,15 @@
+GET http://localhost:1337/api/singers
+###
+POST http://localhost:1337/api/musiques
+Content-Type: application/json
+
+{ "data": 
+    {
+    "singer" : 1 ,
+    "Song": "Bad card",
+    "YoutubeLink": "https://www.youtube.com/watch?v=PImR07Vmong",
+    "RealeaseDate": "1991-01-01",
+    "Color":"#134522",
+    "Fav" : "true"
+    }
+}
