@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import MusicBlock from "./MusiqueBlock";
 
 interface MusicData {
@@ -25,8 +25,13 @@ const Home = () => {
 
         if (response.ok) {
           const data = await response.json();
-          setTabMusiquesData(data);
-          console.log(data);
+
+          // Ensure that data is an array before updating the state
+          if (Array.isArray(data)) {
+            setTabMusiquesData(data);
+          } else {
+            console.error("Fetched data is not an array:", data);
+          }
         } else {
           console.error("Failed to fetch data");
         }
@@ -36,7 +41,7 @@ const Home = () => {
     };
 
     fetchData(); // Call the async function immediately
-  }, []); // Empty dependency array to run the effect only once on mount
+  }, [setTabMusiquesData]); // Empty dependency array to run the effect only once on mount
 
   return (
     <div>
@@ -46,7 +51,7 @@ const Home = () => {
 
       {tabMusiquesData.map((e, i) => (
         <MusicBlock
-          key={i} // It's a good practice to include a unique key when mapping over an array of components
+          key={i}
           Song={e.Song}
           Color={e.Color}
           Fav={e.Fav}
