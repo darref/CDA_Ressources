@@ -1,4 +1,8 @@
-GET http://localhost:1337/api/singers
+GET http://localhost:1337/api/musiques?populate=*
+###
+GET http://localhost:1337/api/musiques?populate=*&filters[Fav][$eq]=false
+###
+GET http://localhost:1337/api/musiques?populate=*&sort=Song:desc
 ###
 POST http://localhost:1337/api/musiques
 Content-Type: application/json

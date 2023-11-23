@@ -6,6 +6,7 @@ import {
 import Home from "./Home";
 import About from "./About";
 import Connection from "./Connexion";
+import Adding from "./Adding";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: "/connection",
     element: <Connection></Connection>,
+  },
+  {
+    path: "/Adding",
+    element: <Adding></Adding>
   }
 ]);
 
