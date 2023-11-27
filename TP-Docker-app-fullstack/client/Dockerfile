@@ -19,7 +19,6 @@ COPY . .
 # Construisez l'application
 RUN npm run build
 
-
 # Exposez le port sur lequel "serve" écoutera (par défaut 5000)
 EXPOSE 5000
 
