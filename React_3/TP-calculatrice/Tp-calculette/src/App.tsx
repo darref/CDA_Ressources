@@ -6,16 +6,55 @@ function App() {
   const [chaineResultat, setChaineResultat] = useState("");
 
   const handleReturnValue = useCallback((val:string)=>{
-      console.log(val , chaineResultat)
-      let newResult = chaineResultat + val;
-      setChaineResultat(newResult);
+        console.log(val , chaineResultat)
+        if(chaineResultat === "error")
+        {
+          setChaineResultat(val)
+        }
+        else
+        {
+          let newResult = chaineResultat + val;
+          setChaineResultat(newResult);
+        }
+      
       },[chaineResultat])
+
+  const handleClearing = useCallback((val:string)=>{
+    console.log(val , chaineResultat)
+    if(chaineResultat === "error")
+    {
+      setChaineResultat("")
+    }
+    else
+    {
+      let newResult = chaineResultat.substring(0 , chaineResultat.length -1)
+      setChaineResultat(newResult);
+    }
+    
+    },[chaineResultat])
+
+    const handleClearingAll = useCallback((val:string)=>{
+      console.log(val , chaineResultat)
+      setChaineResultat("")
+      },[chaineResultat])
+
+  const handleEqual = useCallback((val:string)=>{
+    console.log(val , chaineResultat)
+
+    let newResult = evaluateExpression(chaineResultat)
+    if(Number.isNaN(newResult))
+      setChaineResultat("error")
+    else
+      setChaineResultat(newResult.toString());
+    console.log("ici:" , newResult)
+    },[chaineResultat])
 
   return (
     <div className='Calc'>
       <div className='zoneResultat'>
         <p className='screenResultat'>{chaineResultat}</p>
-        <Bouton val={'<-'} returnValue={handleReturnValue}></Bouton>
+        <Bouton val={'<-'} returnValue={handleClearing}></Bouton>
+        <Bouton val={'C'} returnValue={handleClearingAll}></Bouton>
       </div>
       <div className='zonePad'>
         <div className='zoneBoutonsNombres'>
@@ -33,7 +72,9 @@ function App() {
         <div className='zoneBoutonsOperateurs'>
           <Bouton val={'+'} returnValue={handleReturnValue}></Bouton>
           <Bouton val={'-'} returnValue={handleReturnValue}></Bouton>
-          <Bouton val={'='} returnValue={handleReturnValue}></Bouton>
+          <Bouton val={'*'} returnValue={handleReturnValue}></Bouton>
+          <Bouton val={'/'} returnValue={handleReturnValue}></Bouton>
+          <Bouton val={'='} returnValue={handleEqual}></Bouton>
         </div>
       </div>
     </div>
@@ -41,3 +82,37 @@ function App() {
 }
 
 export default App
+
+function evaluateExpression(expression: string) {
+// Utilisez la méthode split pour diviser l'expression en termes
+const terms = expression.split(/([+\-*/])/).map((term) => term.trim());
+
+// Convertissez les termes en nombres et effectuez les calculs
+let result = parseFloat(terms[0]);
+
+for (let i = 1; i < terms.length; i += 2) {
+  const operator = terms[i];
+  const operand = parseFloat(terms[i + 1]);
+
+  switch (operator) {
+    case "+":
+      result += operand;
+      break;
+    case "-":
+      result -= operand;
+      break;
+    case "*":
+      result *= operand;
+      break;
+    case "/":
+      if (operand === 0) {
+        throw new Error("Division par zéro");
+      }
+      result /= operand;
+      break;
+    default:
+      result = NaN;
+    }
+  }
+  return result;
+}
