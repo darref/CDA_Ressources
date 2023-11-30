@@ -26,7 +26,7 @@ test('check main content', async ({ page }) => {
 
   // Check if there is at least one article in the main content.
   const articles = await mainContent.locator('article');
-  await expect(articles.count()).toBeGreaterThan(0);
+  await expect(articles.count()).toBeGreaterThan(5);
 
   // Check if the first article has a specific class.
   const firstArticle = await articles.first();
